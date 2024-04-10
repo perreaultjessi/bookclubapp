@@ -15,16 +15,16 @@
     <form action="#" th:action="@{/wishlist}" th:object="${wishlistItem}" method="post">
         <div class="form-group">
             <label for="isbn">ISBN:</label>
-            <!-- Input field for ISBN -->
+            <!--Input field for ISBN -->
             <input type="text" class="form-control" id="isbn" name="isbn" th:field="*{isbn}" required>
             <!-- Display errors for ISBN field -->
             <small th:if="${#fields.hasErrors('isbn')}" style="color: red;" th:errors="*{isbn}"></small>
         </div>
         <div class="form-group">
             <label for="title">Title:</label>
-            <!-- Input field for Title -->
+            <!--Input field for Title -->
             <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
-            <!-- Display errors for Title field -->
+            <!--Display errors for Title field -->
             <small th:if="${#fields.hasErrors('title')}" style="color: red;" th:errors="*{title}"></small>
         </div>
         <!-- Submit button -->
