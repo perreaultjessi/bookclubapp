@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Book</title>
+    <!-- Bootstrap StyleSheet CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">View Book</h1>
+    <!-- Bootstrap Card to display book details -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${book.getTitle()}"></h5>
+            <p class="card-text" th:text="${book.getDescription()}"></p>
+            <strong>Authors:</strong>
+            <ul th:each="author : ${book.getAuthors()}">
+                <li th:text="${author}"></li>
+            </ul>
+            <a href="/" th:href="@{/}" class="btn btn-primary">Return to books</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

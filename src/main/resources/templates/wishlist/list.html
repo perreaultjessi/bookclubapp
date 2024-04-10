@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wishlist</title>
+    <!-- Bootstrap css-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>Wishlist</h1>
+    <a href="/wishlist/new" th:href="@{/wishlist/new}" class="btn btn-outline-secondary mb-3">New Wishlist item</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="item : ${wishlist}">
+            <!-- Populate rows with wishlist book attributes -->
+            <td th:text="${item.isbn}"></td>
+            <td th:text="${item.title}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Include Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

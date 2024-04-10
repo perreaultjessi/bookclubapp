@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Wishlist Item</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>New Wishlist Item</h1>
+
+    <!-- New HTML form -->
+    <form action="#" th:action="@{/wishlist}" th:object="${wishlistItem}" method="post">
+        <div class="form-group">
+            <label for="isbn">ISBN:</label>
+            <!-- Input field for ISBN -->
+            <input type="text" class="form-control" id="isbn" name="isbn" th:field="*{isbn}" required>
+            <!-- Display errors for ISBN field -->
+            <small th:if="${#fields.hasErrors('isbn')}" style="color: red;" th:errors="*{isbn}"></small>
+        </div>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <!-- Input field for Title -->
+            <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
+            <!-- Display errors for Title field -->
+            <small th:if="${#fields.hasErrors('title')}" style="color: red;" th:errors="*{title}"></small>
+        </div>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <!-- Anchor tag to return to wishlist -->
+    <a href="/wishlist" class="btn btn-outline-secondary mt-3">Return to wishlist</a>
+</div>
+
+</body>
+</html>
