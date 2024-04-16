@@ -2,10 +2,12 @@ package com.bookclub.web;
 
 import com.bookclub.model.WishlistItem;
 import com.bookclub.service.dao.WishlistDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -15,7 +17,8 @@ public class WishlistController {
 
     private WishlistDao wishlistDao;
 
-    public WishlistController(WishlistDao wishlistDao) {
+    @Autowired
+    public void setWishlistDao(WishlistDao wishlistDao) {
         this.wishlistDao = wishlistDao;
     }
 
@@ -34,10 +37,13 @@ public class WishlistController {
 
     @PostMapping
     public String addWishlistItem(@Valid @ModelAttribute("wishlistItem") WishlistItem wishlistItem, BindingResult bindingResult) {
+        System.out.println(wishlistItem.toString()); // Printing the item for debugging
         if (bindingResult.hasErrors()) {
             return "wishlist/new";
         }
+        wishlistDao.add(wishlistItem); // Add the record to MongoDB
         return "redirect:/wishlist";
     }
 }
+
 

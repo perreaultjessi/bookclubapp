@@ -2,8 +2,12 @@ package com.bookclub.model;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id; //Import for @Id
 
 public class WishlistItem {
+    @Id //Decorator for the id property
+    private String id;
+
     @NotNull
     @NotEmpty(message = "ISBN is a required field.")
     private String isbn;
@@ -12,39 +16,30 @@ public class WishlistItem {
     @NotEmpty(message = "Title is a required field.")
     private String title;
 
-    // Default constructor
+    //default constructor
     public WishlistItem() {
     }
 
-    // Constructor with parameters
+    //constructor with parameters
     public WishlistItem(String isbn, String title) {
         this.isbn = isbn;
         this.title = title;
     }
 
-    // Getter and setter methods
-    public String getIsbn() {
-        return isbn;
+    //getter and setter methods for id
+    public String getId() {
+        return id;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     // Override toString method
     @Override
     public String toString() {
-        return "WishlistItem{" +
-                "isbn='" + isbn + '\'' +
-                ", title='" + title + '\'' +
-                '}';
+        return String.format("WishlistItem{id='%s', isbn='%s', title='%s'}", id, isbn, title);
     }
 }
+
