@@ -37,11 +37,11 @@ public class WishlistController {
 
     @PostMapping
     public String addWishlistItem(@Valid @ModelAttribute("wishlistItem") WishlistItem wishlistItem, BindingResult bindingResult) {
-        System.out.println(wishlistItem.toString()); // Printing the item for debugging
+        System.out.println(wishlistItem.toString());
         if (bindingResult.hasErrors()) {
             return "wishlist/new";
         }
-        wishlistDao.add(wishlistItem); // Add the record to MongoDB
+        wishlistDao.add(wishlistItem);
         return "redirect:/wishlist";
     }
 }
