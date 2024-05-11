@@ -3,6 +3,7 @@ package com.bookclub.web;
 import com.bookclub.model.WishlistItem;
 import com.bookclub.service.dao.WishlistDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +21,9 @@ public class WishlistRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<WishlistItem> showWishlist() {
-        return wishlistDao.list();
+    public List<WishlistItem> showWishlist(Authentication authentication) {
+        String username = authentication.getName();
+        return wishlistDao.list(username);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
@@ -29,4 +31,3 @@ public class WishlistRestController {
         return wishlistDao.find(id);
     }
 }
-
