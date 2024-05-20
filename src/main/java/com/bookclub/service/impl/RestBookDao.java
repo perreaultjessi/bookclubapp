@@ -15,11 +15,11 @@ import java.util.List;
 public class RestBookDao implements BookDao
 {
 
-    public List<Book> list()
+    @Override
+    public List<Book> list(String key)
     {
-        String isbnString = "ISBN:9780593099322,9780261102361,9780261102378,9780590302715,9780316769532";
-        Object doc = getBooksDoc(isbnString);
-        List<Book> books = new ArrayList<Book>();
+        Object doc = getBooksDoc(key);
+        List<Book> books = new ArrayList<>();
         List<String> titles = JsonPath.read(doc, "$..title");
         List<String> isbns = JsonPath.read(doc, "$..bib_key");
         List<String> infoUrls = JsonPath.read(doc, "$..info_url");
@@ -30,6 +30,7 @@ public class RestBookDao implements BookDao
         return books;
     }
 
+    @Override
     public Book find(String key)
     {
         Object doc = getBooksDoc(key);
@@ -43,11 +44,10 @@ public class RestBookDao implements BookDao
         String desc = subtitle.size() > 0 ? subtitle.get(0) : "N/A";
         int numOfPages = pages.size() > 0 ? Integer.parseInt(pages.get(0)) : 0;
         String infoUrl = infoUrls.size() > 0 ? infoUrls.get(0) : "N/A";
-        Book book = new Book(isbn, title, desc, infoUrl, numOfPages);
-        return book;
+        return new Book(isbn, title, desc, infoUrl, numOfPages);
     }
 
-    public List<Book> getBooksDoc(String isbnString)
+    private Object getBooksDoc(String isbnString)
     {
         String openLibraryUrl = "https://openlibrary.org/api/books";
         RestTemplate rest = new RestTemplate();

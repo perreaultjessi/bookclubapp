@@ -10,14 +10,16 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter
+{
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // Create a local variable named encoder of type PasswordEncoder
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception
+    {
+        //create a local variable named encoder of type PasswordEncoder
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-        // Use the encoder to configure authentication
+        //use the encoder to configure authentication
         auth
                 .inMemoryAuthentication()
                 .withUser("user").password(encoder.encode("password")).roles("USER")
@@ -29,16 +31,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .anyRequest().authenticated()
-                    .and()
+                .antMatchers("/monthly-books/list", "/monthly-books/new", "/monthly-books").hasRole("ADMIN") // Restrict access to ADMIN users
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                    .loginPage("/login") // Custom login page
-                    .permitAll() // Allow access to the login page without authentication
-                    .and()
+                .loginPage("/login")
+                .permitAll() //access allowance to login page without need for authentication
+                .and()
                 .logout()
-                    .logoutSuccessUrl("/login?logout") // Redirect to login page after logout
-                    .invalidateHttpSession(true)
-                    .permitAll(); // Allow access to the logout URL without authentication
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
+                .permitAll(); //access allowance to logout page without need for authentication
     }
 }
 

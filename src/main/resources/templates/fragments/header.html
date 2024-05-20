@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head></head>
 <body>
 <header th:fragment="header">
@@ -14,7 +14,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="Navbar-nav">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/about" th:href="@{/about}">About Us</a>
                     </li>
@@ -27,6 +27,9 @@
                     <li class="nav-item">
                         <a href="/swagger-ui.html" class="nav-link" target="_blank">OpenAPI Specification</a>
                     </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a href="/monthly-books" class="nav-link" th:href="@{/monthly-books}">Monthly Books</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -34,4 +37,5 @@
 </header>
 </body>
 </html>
+
 
